@@ -1,0 +1,121 @@
+{
+  "rules": {
+    "apnea_risk": "breathing_events_per_hr >= 15 or min_spo2_pct < 90",
+    "insomnia": "sleep_latency_min >= 30 or sleep_efficiency_pct < 80",
+    "sleep_deprivation": "total_sleep_hr < 5",
+    "oversleeping": "total_sleep_hr > 10",
+    "irregular_schedule": "abs(bedtime_dev_hr) >= 2"
+  },
+  "binary_full_dataset": {
+    "Rule-based": {
+      "accuracy": 0.891,
+      "precision": 0.566,
+      "recall": 0.707,
+      "f1": 0.629,
+      "tp": 463,
+      "fp": 355,
+      "fn": 192,
+      "tn": 3990
+    },
+    "Isolation Forest": {
+      "accuracy": 0.913,
+      "precision": 0.668,
+      "recall": 0.663,
+      "f1": 0.665,
+      "tp": 434,
+      "fp": 216,
+      "fn": 221,
+      "tn": 4129
+    }
+  },
+  "binary_test_set": {
+    "Rule-based": {
+      "accuracy": 0.906,
+      "precision": 0.667,
+      "recall": 0.694,
+      "f1": 0.68,
+      "tp": 100,
+      "fp": 50,
+      "fn": 44,
+      "tn": 806
+    },
+    "Isolation Forest": {
+      "accuracy": 0.922,
+      "precision": 0.766,
+      "recall": 0.66,
+      "f1": 0.709,
+      "tp": 95,
+      "fp": 29,
+      "fn": 49,
+      "tn": 827
+    },
+    "Random Forest": {
+      "accuracy": 0.965,
+      "precision": 0.847,
+      "recall": 0.924,
+      "f1": 0.884,
+      "tp": 133,
+      "fp": 24,
+      "fn": 11,
+      "tn": 832
+    }
+  },
+  "multiclass": {
+    "rule_based_accuracy": 0.877,
+    "rule_based_macro_f1": 0.639,
+    "rf_accuracy": 0.962,
+    "rf_macro_f1": 0.884,
+    "rf_cv_macro_f1_mean": 0.801,
+    "rf_cv_macro_f1_std": 0.058
+  },
+  "per_class_recall": {
+    "rule_based": {
+      "normal": 0.918,
+      "insomnia": 0.923,
+      "sleep_deprivation": 0.338,
+      "irregular_schedule": 0.568,
+      "apnea_risk": 0.775,
+      "oversleeping": 0.36
+    },
+    "random_forest": {
+      "normal": 0.972,
+      "insomnia": 0.941,
+      "sleep_deprivation": 0.912,
+      "irregular_schedule": 0.852,
+      "apnea_risk": 0.878,
+      "oversleeping": 1.0
+    }
+  },
+  "rf_top_confusions": [
+    {
+      "actual": "normal",
+      "predicted": "sleep_deprivation",
+      "count": 14
+    },
+    {
+      "actual": "apnea_risk",
+      "predicted": "normal",
+      "count": 6
+    },
+    {
+      "actual": "normal",
+      "predicted": "oversleeping",
+      "count": 4
+    }
+  ],
+  "rf_test_rows": 1000,
+  "rf_test_participants": 20,
+  "rf_top_features": {
+    "sleep_dev_hr": 0.1509,
+    "breathing_events_per_hr": 0.1083,
+    "bedtime_dev_hr": 0.1074,
+    "total_sleep_hr": 0.0971,
+    "sleep_efficiency_pct": 0.0953,
+    "sleep_latency_min": 0.0836,
+    "time_in_bed_hr": 0.0835,
+    "bedtime_hr": 0.054,
+    "min_spo2_pct": 0.0423,
+    "waso_min": 0.0387
+  },
+  "isolation_forest_contamination": 0.13
+}

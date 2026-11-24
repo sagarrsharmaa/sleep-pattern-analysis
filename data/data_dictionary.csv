@@ -1,0 +1,29 @@
+column_name,data_type,sample_value_1,sample_value_2,sample_value_3,nullable,description
+record_id,string,S00001,S00002,S00003,No,Unique ID of the nightly record (S00001-S05000).
+participant_id,string,P001,P002,P003,No,Anonymous participant ID (P001-P100). No names or personal identifiers are stored.
+date,string date,2024-01-01,2024-01-01,2024-01-01,No,Calendar date on which the night started (YYYY-MM-DD).
+day_of_week,string/category,Monday,Monday,Monday,No,Day name of the night's start date.
+is_weekend,integer (0/1),0,0,0,No,"1 for Friday and Saturday nights, otherwise 0."
+age,integer,22,55,49,No,Participant age in years (18-65).
+gender,string/category,Male,Female,Male,No,Participant gender (Male/Female).
+bmi,float,27.7,25.3,26.2,No,Body-mass index (kg/m^2).
+bedtime,string time,00:54,22:32,23:38,No,"Clock time the participant went to bed (HH:MM, 24-hour)."
+wake_time,string time,07:20,05:57,06:23,No,"Clock time the participant got out of bed (HH:MM, 24-hour)."
+time_in_bed_hr,float,6.44,7.42,6.75,No,Hours from bedtime to wake time = total sleep + latency + WASO.
+sleep_latency_min,float,7.9,18.9,20.3,No,Minutes taken to fall asleep after going to bed.
+total_sleep_hr,float,6.15,6.81,6.13,No,Total hours actually asleep.
+sleep_efficiency_pct,float,95.6,91.8,90.8,No,Total sleep / time in bed x 100.
+awakenings,integer,1,2,1,No,Number of awakenings after falling asleep.
+waso_min,float,9.2,17.6,16.8,No,Wake After Sleep Onset: minutes awake after first falling asleep.
+deep_sleep_pct,float,29.6,14.3,19.3,No,Share of total sleep spent in deep (N3) sleep.
+rem_sleep_pct,float,15.7,19.4,24.1,No,Share of total sleep spent in REM sleep.
+light_sleep_pct,float,54.7,66.3,56.6,No,Share of total sleep spent in light (N1/N2) sleep; deep + REM + light = 100.
+avg_heart_rate_bpm,float,62.8,58.4,60.7,No,Average heart rate during sleep (beats per minute).
+min_spo2_pct,float,96.5,94.0,93.0,No,Lowest blood-oxygen saturation recorded during the night (%).
+breathing_events_per_hr,float,1.2,1.0,1.6,No,Breathing disturbances per hour of sleep (apnea-hypopnea style index).
+caffeine_mg,integer,105,27,162,No,Caffeine consumed during the day (mg).
+screen_time_min,integer,39,0,31,No,Screen use in the two hours before bed (minutes).
+daily_steps,integer,7825,4292,3675,No,Steps walked during the day.
+stress_level,integer,4,4,8,No,"Self-reported stress for the day (1 = low, 10 = high)."
+abnormality_type,string/category,sleep_deprivation,normal,normal,No,"Ground-truth sleep pattern: normal, insomnia, sleep_deprivation, irregular_schedule, apnea_risk or oversleeping."
+abnormality_flag,integer (0/1),1,0,0,No,"1 if abnormality_type is not 'normal', otherwise 0."
