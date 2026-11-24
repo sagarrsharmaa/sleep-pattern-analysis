@@ -4,7 +4,7 @@ Analyse nightly sleep data, uncover patterns (duration, timing, efficiency, slee
 
 **Author:** Sagar Sharma · HCLTech Career Shaper Programme – III Year Industry Project (2025–26)
 
-**Live dashboard:** https://sleep-pattern-analysis-sagar.streamlit.app
+**Live dashboard:** https://sagarrsharmaa.github.io/sleep-pattern-analysis/ (runs in your browser - first load takes about 30-60 seconds)
 
 ---
 

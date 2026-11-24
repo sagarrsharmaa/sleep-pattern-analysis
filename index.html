@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sleep Pattern Analysis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.12.1/build/stlite.css" />
+    <style>
+      body { margin: 0; font-family: system-ui, sans-serif; }
+      #loading { padding: 48px 24px; text-align: center; color: #512A7A; }
+    </style>
+  </head>
+  <body>
+    <div id="root"><div id="loading"><h2>🌙 Sleep Pattern Analysis &amp; Abnormality Detection</h2><p>Loading the dashboard in your browser (first load takes about 30–60 seconds)…</p></div></div>
+    <script type="module">
+      import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.12.1/build/stlite.js";
+      const files = [
+        "app.py", ".streamlit/config.toml",
+        "src/features.py", "src/detection.py", "src/style.py",
+        "data/sleep_dataset.csv", "data/data_dictionary.csv",
+      ];
+      mount(
+        {
+          requirements: ["plotly", "scikit-learn", "matplotlib"],
+          entrypoint: "app.py",
+          files: Object.fromEntries(files.map((f) => [f, { url: "./" + f }])),
+        },
+        document.getElementById("root"),
+      );
+    </script>
+  </body>
+</html>
