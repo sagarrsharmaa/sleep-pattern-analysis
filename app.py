@@ -50,6 +50,11 @@ def train_model(df: pd.DataFrame):
     return make_classifier().fit(df[MODEL_FEATURES], df["abnormality_type"])
 
 
+def show_dates(frame: pd.DataFrame) -> pd.DataFrame:
+    """Format the date column as YYYY-MM-DD for display."""
+    return frame.assign(date=frame["date"].dt.strftime("%Y-%m-%d"))
+
+
 def clock(h: float) -> str:
     m = int(round(h * 60)) % 1440
     return f"{m // 60:02d}:{m % 60:02d}"
@@ -182,7 +187,7 @@ with tab_abn:
     st.subheader("Most unusual nights (Isolation Forest score)")
     cols = ["record_id", "participant_id", "date", "total_sleep_hr", "sleep_latency_min", "sleep_efficiency_pct",
             "min_spo2_pct", "breathing_events_per_hr", "abnormality_type", "rule_prediction", "anomaly_score"]
-    st.dataframe(df.nlargest(15, "anomaly_score")[cols], hide_index=True)
+    st.dataframe(show_dates(df.nlargest(15, "anomaly_score")[cols]), hide_index=True)
 
 # ---------------------------------------------------------------------------
 # Participant view
@@ -215,7 +220,7 @@ with tab_person:
 
     if not ab.empty:
         st.markdown("**Abnormal nights**")
-        st.dataframe(ab[["date", "bedtime", "wake_time", "total_sleep_hr", "sleep_latency_min",
+        st.dataframe(show_dates(ab)[["date", "bedtime", "wake_time", "total_sleep_hr", "sleep_latency_min",
                          "sleep_efficiency_pct", "min_spo2_pct", "abnormality_type", "rule_prediction"]],
                      hide_index=True)
 
@@ -284,6 +289,6 @@ with tab_check:
 # ---------------------------------------------------------------------------
 with tab_data:
     raw_cols = [c for c in pd.read_csv(DATASET, nrows=0).columns]
-    st.dataframe(df[raw_cols], hide_index=True)
-    st.download_button("Download filtered data (CSV)", df[raw_cols].to_csv(index=False).encode(),
+    st.dataframe(show_dates(df)[raw_cols], hide_index=True)
+    st.download_button("Download filtered data (CSV)", show_dates(df)[raw_cols].to_csv(index=False).encode(),
                        "sleep_data_filtered.csv", "text/csv")
